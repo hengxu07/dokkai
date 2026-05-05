@@ -13,3 +13,4 @@ __pycache__/
 # PDF test files
 *.pdf
 test.txt
+test-files/

@@ -87,3 +87,24 @@ Text: {text}"""
     raw = response.content[0].text
     clean = raw.replace("```json", "").replace("```", "").strip()
     return json.loads(clean)
+
+
+def analyze_kanji(text: str) -> list[dict]:
+    """Extract and explain kanji found in Japanese text."""
+    response = client.messages.create(
+        model="claude-sonnet-4-5",
+        max_tokens=1024,
+        messages=[
+            {
+                "role": "user",
+                "content": f"""Extract the 10 most important kanji from this Japanese text.
+Return ONLY a JSON array, no other text. Format:
+[{{"kanji": "食", "reading": "た(べる)、しょく", "meaning": "eat, food", "example": "食べる"}}]
+
+Text: {text}"""
+            }
+        ]
+    )
+    raw = response.content[0].text
+    clean = raw.replace("```json", "").replace("```", "").strip()
+    return json.loads(clean)

@@ -122,3 +122,12 @@ def get_quiz(doc_id: str, user_id: int = Depends(get_current_user)):
     quizzes = ai.generate_quiz(content)
     database.save_quizzes(doc_id, user_id, quizzes)
     return {"doc_id": doc_id, "source": "generated", "quiz": quizzes}
+
+@app.get("/kanji/{doc_id}")
+def get_kanji(doc_id: str, user_id: int = Depends(get_current_user)):
+    """Extract and explain kanji from uploaded document."""
+    content = database.get_document(doc_id, user_id)
+    if not content:
+        raise HTTPException(status_code=404, detail="Document not found")
+    kanji = ai.analyze_kanji(content)
+    return {"doc_id": doc_id, "kanji": kanji}

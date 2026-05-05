@@ -1,4 +1,4 @@
-# Dokkai 📖
+# Dokkai 読解 📖
 > AI-powered Japanese reading assistant API
 
 Dokkai helps Japanese learners analyze reading materials by extracting vocabulary, identifying grammar patterns, assessing JLPT difficulty levels, and generating quizzes — all powered by Claude AI.

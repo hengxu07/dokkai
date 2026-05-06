@@ -13,7 +13,7 @@ app = FastAPI(title="Dokkai API", description="AI-powered Japanese reading assis
 # Allow React frontend to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://dokkai-lilac.vercel.app"],
+    allow_origins=["https://dokkai-lilac.vercel.app", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

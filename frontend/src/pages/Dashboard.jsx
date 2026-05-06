@@ -8,7 +8,6 @@ function Dashboard() {
   const token = localStorage.getItem('token');
   const headers = { Authorization: `Bearer ${token}` };
 
-  const [docId, setDocId] = useState('');
   const [file, setFile] = useState(null);
   const [activeTab, setActiveTab] = useState('vocabulary');
   const [result, setResult] = useState(null);

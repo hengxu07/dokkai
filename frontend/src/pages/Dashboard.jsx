@@ -64,6 +64,7 @@ function Dashboard() {
     if (!result) return null;
 
     if (activeTab === 'vocabulary') {
+      if (!result.vocabulary) return <p style={s.error}>No vocabulary found</p>;
       return (
         <table style={s.table}>
           <thead>
@@ -87,6 +88,7 @@ function Dashboard() {
     }
 
     if (activeTab === 'grammar') {
+      if (!result.grammar) return <p style={s.error}>No grammar found</p>;
       return result.grammar.map((g, i) => (
         <div key={i} style={s.card}>
           <p style={s.pattern}>{g.pattern}</p>
@@ -97,6 +99,7 @@ function Dashboard() {
     }
 
     if (activeTab === 'kanji') {
+      if (!result.kanji) return <p style={s.error}>No kanji found</p>;
       return (
         <table style={s.table}>
           <thead>
@@ -122,6 +125,7 @@ function Dashboard() {
     }
 
     if (activeTab === 'level') {
+      if (!result.level) return <p style={s.error}>No level found</p>;
       return (
         <div style={s.card}>
           <div style={s.levelBadge}>JLPT {result.level}</div>
@@ -131,13 +135,14 @@ function Dashboard() {
     }
 
     if (activeTab === 'quiz') {
+      if (!result.quiz) return <p style={s.error}>No quiz found</p>;
       return result.quiz.map((q, i) => (
         <div key={i} style={s.card}>
           <p style={s.pattern}>{i + 1}. {q.question}</p>
           {q.choices.map((c, j) => (
             <div key={j} style={{
               ...s.choice,
-              background: c === q.answer ? '#EEEDFE' : 'var(--color-background-secondary, #f5f5f5)',
+              background: c === q.answer ? '#EEEDFE' : '#f5f4f9',
               color: c === q.answer ? '#534AB7' : 'inherit',
               borderColor: c === q.answer ? '#AFA9EC' : 'transparent',
             }}>
@@ -148,7 +153,7 @@ function Dashboard() {
       ));
     }
   };
-
+  
   const tabs = ['vocabulary', 'grammar', 'kanji', 'level', 'quiz'];
   const tabIcons = { vocabulary: '📚', grammar: '📝', kanji: '字', level: '📊', quiz: '❓' };
 

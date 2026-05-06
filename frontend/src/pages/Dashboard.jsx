@@ -24,17 +24,17 @@ function Dashboard() {
   };
 
   const handleUpload = async () => {
-    if (!docId || !file) return setError('Please enter a document ID and select a file');
+    if (!file) return setError('Please select a file');
+    const autoDocId = file.name.replace(/\.[^/.]+$/, ''); // remove extension
     setLoading(true);
     setError('');
     try {
       const formData = new FormData();
       formData.append('file', file);
-      await axios.post(`${API}/upload/${docId}`, formData, { headers });
-      if (!documents.includes(docId)) setDocuments([...documents, docId]);
-      setSelectedDoc(docId);
+      await axios.post(`${API}/upload/${autoDocId}`, formData, { headers });
+      if (!documents.includes(autoDocId)) setDocuments([...documents, autoDocId]);
+      setSelectedDoc(autoDocId);
       setResult(null);
-      setDocId('');
       setFile(null);
     } catch (err) {
       setError('Upload failed');
@@ -238,12 +238,6 @@ function Dashboard() {
             </div>
             <div style={s.uploadSub}>Drag & drop or click to choose a .txt or .pdf file</div>
             <div style={s.uploadRow}>
-              <input
-                style={s.input}
-                placeholder="Document ID (e.g. lesson1)"
-                value={docId}
-                onChange={e => setDocId(e.target.value)}
-              />
               <label style={s.fileBtn}>
                 Choose file
                 <input

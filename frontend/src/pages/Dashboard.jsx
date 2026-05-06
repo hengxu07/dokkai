@@ -153,7 +153,7 @@ function Dashboard() {
       ));
     }
   };
-  
+
   const tabs = ['vocabulary', 'grammar', 'kanji', 'level', 'quiz'];
   const tabIcons = { vocabulary: '📚', grammar: '📝', kanji: '字', level: '📊', quiz: '❓' };
 
@@ -214,11 +214,6 @@ function Dashboard() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             {selectedDoc && <span style={s.docBadge}>{selectedDoc}</span>}
-            {selectedDoc && (
-              <button style={s.analyzeBtn} onClick={handleAnalyze} disabled={loading}>
-                {loading ? 'Analyzing...' : `Analyze`}
-              </button>
-            )}
           </div>
         </div>
 
@@ -263,12 +258,23 @@ function Dashboard() {
           {result && <div style={s.results}>{renderResult()}</div>}
 
           {!result && selectedDoc && !loading && (
-            <div style={s.emptyState}>
-              <p style={{ color: 'var(--color-text-tertiary, #aaa)', fontSize: '14px' }}>
-                Click "Analyze" to get {activeTab} for {selectedDoc}
-              </p>
-            </div>
-          )}
+  <div style={s.emptyState}>
+    <p style={{ color: '#aaa', fontSize: '14px', marginBottom: '16px' }}>
+      Ready to analyze {selectedDoc}
+    </p>
+    <button style={s.analyzeBtn} onClick={handleAnalyze}>
+      Get {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+    </button>
+  </div>
+)}
+
+{!selectedDoc && (
+  <div style={s.emptyState}>
+    <p style={{ color: '#aaa', fontSize: '14px' }}>
+      Upload a document to get started
+    </p>
+  </div>
+)}
         </div>
       </div>
     </div>

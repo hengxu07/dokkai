@@ -3,10 +3,13 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pypdf import PdfReader
+from dotenv import load_dotenv
 import io
 import database
 import ai
 import auth
+
+load_dotenv()
 
 app = FastAPI(title="Dokkai API", description="AI-powered Japanese reading assistant")
 
